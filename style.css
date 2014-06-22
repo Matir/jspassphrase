@@ -1,0 +1,61 @@
+body {
+  max-width: 800px;
+  font-family: Verdana, sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #424242;
+  color: #fff;
+}
+#info {
+}
+#info h2 {
+  margin-left: auto;
+  margin-right: auto;
+}
+#notify {
+}
+#selector {
+  padding: 8px;
+}
+#entropy {
+  border: 1px solid #282828;
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+#results {
+  font-size: 125%;
+  width: 100%;
+  background-color: #77b300;
+  border: 1px solid #809a00;
+  padding: 4px;
+  border-radius: 3px;
+  clear: both;
+  text-align: center;
+}
+#copyright {
+}
+.center-container {
+  float: right;
+  right: 50%;
+  position: relative;
+  clear: both;
+}
+.center-inner {
+  float: right;
+  right: -50%;
+  position: relative;
+}
+#notify-load-failed {
+  display: none;
+}
+#notify-bad-entropy {
+  display: none;
+}
+button {
+  background-color: #2a9fd6;
+  border-color: #2a9fd6;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 8px 12px;
+}

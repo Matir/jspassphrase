@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>Passphrase Generator</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+  </head>
+  <body>
+    <div class='center-container'>
+      <div id='title' class='center-inner'>
+        <h2>Passphrase Generator</h2>
+      </div>
+    </div>
+    <div class='center-container'>
+      <div id='info' class='center-inner'>
+        <p>This generates random passphrases by picking from a list of words.</p>
+      </div>
+    </div>
+    <div class='center-container'>
+      <div id='notify' class='center-inner'>
+        <ul>
+          <li id='notify-load-failed'>Failed to load wordlist.</li>
+          <li id='notify-bad-entropy'>WebCrypto not available; using weak entropy
+            source.</li>
+        </ul>
+      </div>
+    </div>
+    <div id='results'>
+      &nbsp;
+    </div>
+    <div class='center-container'>
+      <div id='selector' class='center-inner'>
+        <span>Entropy (bits):</span>
+        <select name='entropy' id='entropy'></select>
+        <button name='go' id='go' disabled>Generate</button>
+      </div>
+    </div>
+    <div class='center-container'>
+      <div id='faq' class='center-inner'>
+      </div>
+    </div>
+    <div class='center-container'>
+      <div id='copyright' class='center-inner'>
+      </div>
+    </div>
+    <script src='passphrase.js'></script>
+  </body>
+</html>
