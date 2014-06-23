@@ -59,3 +59,9 @@ button {
   border-radius: 4px;
   padding: 8px 12px;
 }
+#github-ribbon a img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+}
