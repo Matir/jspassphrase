@@ -1,4 +1,4 @@
-== JSPassphrase ==
+## JSPassphrase ##
 
 JSPassphrase is a JavaScript-based passphrase generator.
 
@@ -7,7 +7,7 @@ The script attempts to use the JS WebCrypto API where available, falling back
 on `Math.random()` if its not available.  The wordlist is based on Debian's
 wamerican package.
 
-== FAQ ==
+## FAQ ##
 
 **Isn't JS Crypto Bad?**
 
