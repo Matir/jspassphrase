@@ -5,6 +5,22 @@ var PassphraseGenerator = function() {
   /* Maximum entropy */
   this.maxEntropy = 256;
 
+  /* Maximum word length */
+  this.maxLength = 0;
+
+  /* Add length options & bind change handler */
+  var lenopt = document.getElementById('maxlen');
+  for (var i=5; i<15; i++) {
+    var o = document.createElement('option');
+    o.value = i;
+    o.innerText = '' + i;
+    lenopt.appendChild(o);
+  }
+  lenopt.addEventListener('change', (function() {
+    this.maxLength = parseInt(lenopt.value);
+    this.updateOptions();
+  }).bind(this));
+
   /* Load wordlist */
   var xhr = new XMLHttpRequest();
   var generator = this;
@@ -16,22 +32,31 @@ var PassphraseGenerator = function() {
 };
 
 PassphraseGenerator.prototype.installWordlist = function(wordlist) {
-    this.wordlist = wordlist;
-    this.bitsPerWord = Math.log(this.wordlist.length)/Math.LN2;
-    var entropy = document.getElementById('entropy');
-    while (entropy.firstChild)
-      entropy.removeChild(entropy.firstChild);
-    var minLen = Math.ceil(this.minEntropy/this.bitsPerWord);
-    var maxLen = Math.ceil(this.maxEntropy/this.bitsPerWord);
-    for (var i=minLen; i<maxLen; ++i) {
-      var o = document.createElement('option');
-      o.value = i;
-      o.innerText = '' + Math.floor(i * this.bitsPerWord);
-      entropy.appendChild(o);
-    }
-    var go = document.getElementById('go');
-    go.disabled = false;
-    go.addEventListener('click', this.generatePassphrase.bind(this));
+  this.wordlist = wordlist;
+  this.updateOptions();
+  var go = document.getElementById('go');
+  go.disabled = false;
+  go.addEventListener('click', this.generatePassphrase.bind(this));
+};
+
+PassphraseGenerator.prototype.updateOptions = function() {
+  this.filteredWordlist = this.wordlist.filter((function(w) {
+    if (!this.maxLength || w.length <= this.maxLength)
+      return true;
+    return false;
+  }).bind(this));
+  var bitsPerWord = Math.log(this.filteredWordlist.length)/Math.LN2;
+  var entropy = document.getElementById('entropy');
+  while (entropy.firstChild)
+    entropy.removeChild(entropy.firstChild);
+  var minLen = Math.ceil(this.minEntropy/bitsPerWord);
+  var maxLen = Math.ceil(this.maxEntropy/bitsPerWord);
+  for (var i=minLen; i<=maxLen; ++i) {
+    var o = document.createElement('option');
+    o.value = i;
+    o.innerText = '' + Math.floor(i * bitsPerWord);
+    entropy.appendChild(o);
+  }
 };
 
 PassphraseGenerator.prototype.wordListFailed = function() {
@@ -64,8 +89,8 @@ PassphraseGenerator.prototype.generatePassphrase_ = function(len) {
   var phrase = Array();
   var rng = this.getRNG();
   for (var i=0; i<len; ++i) {
-    var w = rng.getRandomValue(this.wordlist.length);
-    phrase.push(this.wordlist[w]);
+    var w = rng.getRandomValue(this.filteredWordlist.length);
+    phrase.push(this.filteredWordlist[w]);
   }
   return phrase.join(" ");
 };

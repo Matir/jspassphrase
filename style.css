@@ -17,7 +17,7 @@ body {
 #selector {
   padding: 8px;
 }
-#entropy {
+select {
   border: 1px solid #282828;
   border-radius: 4px;
   padding: 8px 12px;
@@ -33,6 +33,7 @@ body {
   text-align: center;
 }
 #copyright {
+  font-size: 75%;
 }
 .center-container {
   float: right;
@@ -58,6 +59,10 @@ button {
   cursor: pointer;
   border-radius: 4px;
   padding: 8px 12px;
+}
+a, a:visited, a:active {
+  color: #2a9fd6;
+  text-decoration: none;
 }
 #github-ribbon a img {
   position: absolute;
